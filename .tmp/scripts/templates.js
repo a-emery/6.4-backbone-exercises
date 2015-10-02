@@ -1,9 +1,12 @@
 this["JST"] = this["JST"] || {};
 this["JST"]["application"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<h1>hello</h1>\n";
+    return "<h1>Objective Links</h1>\n\n<a href=\"a.html\"><button>Objective A</button></a>\n<a href=\"b.html\"><button>Objective B</button></a>\n<a href=\"c.html\"><button>Objective C</button></a>\n<a href=\"d.html\"><button>Objective D</button></a>\n<a href=\"e.html\"><button>Objective E</button></a>\n\n<a href=\"index.html\"><button>Index</button></a>\n";
 },"useData":true});
 this["JST"]["a/a-index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<h1>Create a Blog Post</h1>\n\n<form action=\"\">\n  <input type=\"text\">\n  <input type=\"text\">\n  <input type=\"submit\">\n</form>\n";
+    return "<h1>Create a Blog Post</h1>\n";
+},"useData":true});
+this["JST"]["a/form"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<input placeholder=\"Blog Title\" type=\"text\" name=\"title\" value=\"\" class=\"blogTitle\">\n<textarea placeholder=\"Blog Body\" type=\"text\" name=\"post\" value=\"\" class=\"postTextArea\"></textarea>\n<input type=\"submit\" class=\"blogSubmit\">\n";
 },"useData":true});
 this["JST"]["b/b-index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<h1>Page B</h1>\n";

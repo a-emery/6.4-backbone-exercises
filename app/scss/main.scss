@@ -19,3 +19,26 @@ body {
   color: $base-font-color;
   font-family: $base-font-family;
 }
+
+.postTextArea {
+  resize: none;
+  display: block;
+  border: 1px solid grey;
+  width: 500px;
+  margin: 20px;
+  height: 300px;
+  padding: 7px;
+}
+
+.blogTitle {
+  border: 1px solid grey;
+  padding: 7px;
+  width: 200px;
+  margin: 20px;
+
+}
+
+.blogSubmit {
+  margin: 20px;
+  padding: 7px;
+}
