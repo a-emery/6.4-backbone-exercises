@@ -52,3 +52,27 @@ body {
   margin: 20px;
   padding: 3px;
 }
+
+.c-blog-posts {
+  width: 40%;
+  float: left;
+  border: 1px solid green;
+  background: $light-gray;
+  padding: 10px;
+}
+
+.blog-list-item {
+  background: lightgrey;
+}
+
+.c-blog-list {
+  list-style: none;
+  color: green;
+  margin: 0;
+  padding: 0;
+}
+
+.current-post {
+  width: 40%;
+  float: right;
+}

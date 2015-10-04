@@ -40,9 +40,20 @@ require.register('b/b-main', function (exports, require, module) {
 });
 require.register('c/c-main', function (exports, require, module) {
     'use strict';
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _cModelsPostsCollection = require('c/models/PostsCollection');
+    var _cModelsPostsCollection2 = _interopRequireDefault(_cModelsPostsCollection);
+    var _cViewPostsList = require('c/view/PostsList');
+    var _cViewPostsList2 = _interopRequireDefault(_cViewPostsList);
     $(document).ready(function () {
-        // prepend the contents of `app/templates/application.hbs` into `body`
         $('#container').append(JST['c/c-index']());
+        var posts = new _cModelsPostsCollection2['default']();
+        posts.fetch();
+        console.log(posts);
+        var postsListView = new _cViewPostsList2['default']({ collection: posts });
+        $('#c-blog-posts-list').append(postsListView.render().el);
     });
 });
 require.register('d/d-main', function (exports, require, module) {
@@ -57,6 +68,24 @@ require.register('e/e-main', function (exports, require, module) {
     $(document).ready(function () {
         // prepend the contents of `app/templates/application.hbs` into `body`
         $('#container').append(JST['e/e-index']());
+    });
+});
+require.register('g-original-c/c-main', function (exports, require, module) {
+    'use strict';
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _cModelsBlogPostsCollection = require('c/models/BlogPostsCollection');
+    var _cModelsBlogPostsCollection2 = _interopRequireDefault(_cModelsBlogPostsCollection);
+    var _cViewBlogList = require('c/view/BlogList');
+    var _cViewBlogList2 = _interopRequireDefault(_cViewBlogList);
+    $(document).ready(function () {
+        // prepend the contents of `app/templates/application.hbs` into `body`
+        $('#container').append(JST['c/c-index']());
+        var blogPostsCollection = new _cModelsBlogPostsCollection2['default']();
+        $('#container').append(blogPostsCollection.render().el);
+        var blogList = new _cViewBlogList2['default']({ collection: blogPostsCollection });
+        $('#container').append(blogList.render().el);
     });
 });
 require.register('a/models/Post', function (exports, require, module) {
@@ -166,6 +195,161 @@ require.register('b/view/PersonForm', function (exports, require, module) {
                 result[input.name] = input.value;
             });
             return result;
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('c/models/Post', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports['default'] = Backbone.Model.extend({
+        'default': {
+            title: 'no title',
+            post: 'no body'
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('c/models/PostsCollection', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _cModelsPost = require('c/models/Post');
+    var _cModelsPost2 = _interopRequireDefault(_cModelsPost);
+    exports['default'] = Backbone.Collection.extend({
+        model: _cModelsPost2['default'],
+        url: 'http://tiny-lasagna-server.herokuapp.com/collections/aaronblogposts'
+    });
+    module.exports = exports['default'];
+});
+require.register('c/view/PostItemView', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports['default'] = Backbone.View.extend({
+        tagName: 'li',
+        className: 'blog-list-item',
+        events: { 'click [data-behavior=show-post]': 'showPost' },
+        template: JST['c/blogListItem'],
+        showPost: function showPost() {
+            $('.current-post').html(this.render().el);
+        },
+        render: function render() {
+            this.$el.html(this.template({ model: this.model.toJSON() }));
+            return this;
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('c/view/PostsList', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _cModelsPostsCollection = require('c/models/PostsCollection');
+    var _cModelsPostsCollection2 = _interopRequireDefault(_cModelsPostsCollection);
+    var _cViewPostItemView = require('c/view/PostItemView');
+    var _cViewPostItemView2 = _interopRequireDefault(_cViewPostItemView);
+    exports['default'] = Backbone.View.extend({
+        initialize: function initialize() {
+            this.listenTo(this.collection, 'add remove', this.render);
+        },
+        tagName: 'ul',
+        className: 'c-blog-list',
+        template: JST['c/blogListItem'],
+        render: function render() {
+            this.renderChildren();
+            return this;
+        },
+        renderChildren: function renderChildren() {
+            var self = this;
+            this.$el.html('');
+            this.collection.each(function (post) {
+                var postItemView = new _cViewPostItemView2['default']({ model: post });
+                self.$el.append(postItemView.render().el);
+            });
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('g-original-c/models/BlogPost', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports['default'] = Backbone.Model.extend({
+        'default': {
+            blogTitle: '',
+            blogPost: ''
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('g-original-c/models/BlogPostsCollection', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _cModelsBlogPost = require('c/models/BlogPost');
+    var _cModelsBlogPost2 = _interopRequireDefault(_cModelsBlogPost);
+    exports['default'] = Backbone.Collection.extend({
+        model: _cModelsBlogPost2['default'],
+        url: 'http://tiny-lasagna-server.herokuapp.com/collections/aaronblogposts'
+    });
+    module.exports = exports['default'];
+});
+require.register('g-original-c/view/Base-view', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports['default'] = Backbone.View.extend({
+        render: function render() {
+            this.$el.html(this.template());
+            return this;
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('g-original-c/view/BlogList', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _cViewBlogListItem = require('c/view/BlogListItem');
+    var _cViewBlogListItem2 = _interopRequireDefault(_cViewBlogListItem);
+    var _cViewBaseView = require('c/view/Base-view');
+    var _cViewBaseView2 = _interopRequireDefault(_cViewBaseView);
+    exports['default'] = _cViewBaseView2['default'].extend({
+        tagName: 'ul',
+        render: function render() {
+            this.renderChildren();
+            return this;
+        },
+        renderChildren: function renderChildren() {
+            this.collection.each(function (post) {
+                var postView = new _cViewBlogListItem2['default']({ model: post });
+                console.log('newest');
+                self.$el.append(postView.render().el);
+            });
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('g-original-c/view/BlogListItem', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _cViewBaseView = require('c/view/Base-view');
+    var _cViewBaseView2 = _interopRequireDefault(_cViewBaseView);
+    exports['default'] = _cViewBaseView2['default'].extend({
+        tagName: 'li',
+        template: JST['c/blogListItem'],
+        render: function render() {
+            this.$el.html(this.template({ model: this.model.toJSON() }));
+            return this;
         }
     });
     module.exports = exports['default'];
