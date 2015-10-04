@@ -58,9 +58,25 @@ require.register('c/c-main', function (exports, require, module) {
 });
 require.register('d/d-main', function (exports, require, module) {
     'use strict';
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _dViewBookmarkCreate = require('d/view/BookmarkCreate');
+    var _dViewBookmarkCreate2 = _interopRequireDefault(_dViewBookmarkCreate);
+    var _dModelsBookmarksCollection = require('d/models/BookmarksCollection');
+    var _dModelsBookmarksCollection2 = _interopRequireDefault(_dModelsBookmarksCollection);
+    var _dViewBookmarkTitleList = require('d/view/BookmarkTitleList');
+    var _dViewBookmarkTitleList2 = _interopRequireDefault(_dViewBookmarkTitleList);
     $(document).ready(function () {
         // prepend the contents of `app/templates/application.hbs` into `body`
         $('#container').append(JST['d/d-index']());
+        var bookmarksCollection = new _dModelsBookmarksCollection2['default']();
+        bookmarksCollection.fetch();
+        // var keyList = _.filter(bookmarksCollection, )
+        var bookmarkCreateView = new _dViewBookmarkCreate2['default']({ collection: bookmarksCollection });
+        $('.d-create-url').append(bookmarkCreateView.render().el);
+        var bookmarkTitleList = new _dViewBookmarkTitleList2['default']({ collection: bookmarksCollection });
+        $('.d-url-list-container').append(bookmarkTitleList.render().el);
     });
 });
 require.register('e/e-main', function (exports, require, module) {
@@ -263,7 +279,6 @@ require.register('c/view/PostsList', function (exports, require, module) {
         },
         tagName: 'ul',
         className: 'c-blog-list',
-        template: JST['c/blogListItem'],
         render: function render() {
             this.renderChildren();
             return this;
@@ -275,6 +290,102 @@ require.register('c/view/PostsList', function (exports, require, module) {
                 var postItemView = new _cViewPostItemView2['default']({ model: post });
                 self.$el.append(postItemView.render().el);
             });
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('d/models/Bookmark', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports['default'] = Backbone.Model.extend({
+        idAttribute: '_id',
+        defaults: {
+            url: '',
+            title: '',
+            tag: ''
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('d/models/BookmarksCollection', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _dModelsBookmark = require('d/models/Bookmark');
+    var _dModelsBookmark2 = _interopRequireDefault(_dModelsBookmark);
+    exports['default'] = Backbone.Collection.extend({
+        model: _dModelsBookmark2['default'],
+        url: 'http://tiny-lasagna-server.herokuapp.com/collections/aaronbookmarks'
+    });
+    module.exports = exports['default'];
+});
+require.register('d/view/BookmarkCreate', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports['default'] = Backbone.View.extend({
+        tagName: 'form',
+        events: { 'submit': 'createUrl' },
+        template: JST['d/createURL'],
+        render: function render() {
+            this.$el.html(this.template());
+            return this;
+        },
+        createUrl: function createUrl(e) {
+            e.preventDefault();
+            this.collection.create(this.serializeForm());
+            this.$('input[type=text]').val('');
+        },
+        serializeForm: function serializeForm() {
+            var result = {};
+            var inputs = this.$el.serializeArray();
+            inputs.forEach(function (input) {
+                result[input.name] = input.value;
+            });
+            return result;
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('d/view/BookmarkTitleList', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _dViewBookmarkTitleListItem = require('d/view/BookmarkTitleListItem');
+    var _dViewBookmarkTitleListItem2 = _interopRequireDefault(_dViewBookmarkTitleListItem);
+    exports['default'] = Backbone.View.extend({
+        tagName: 'ul',
+        className: 'bookmark-title-list',
+        initialize: function initialize() {
+            this.listenTo(this.collection, 'add remove', this.render);
+        },
+        render: function render() {
+            this.renderChildren();
+            return this;
+        },
+        renderChildren: function renderChildren() {
+            var self = this;
+            this.$el.html('');
+            this.collection.each(function (bookmark) {
+                var bookmarkTitleListItem = new _dViewBookmarkTitleListItem2['default']({ model: bookmark });
+                self.$el.append(bookmarkTitleListItem.render().el);
+            });
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('d/view/BookmarkTitleListItem', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports['default'] = Backbone.View.extend({
+        template: JST['d/URLListItem'],
+        tagName: 'li',
+        render: function render() {
+            this.$el.html(this.template({ model: this.model.toJSON() }));
+            return this;
         }
     });
     module.exports = exports['default'];

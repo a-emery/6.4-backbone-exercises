@@ -11,8 +11,6 @@ export default Backbone.View.extend({
 
   className: 'c-blog-list',
 
-  template: JST['c/blogListItem'],
-
   render: function(){
     this.renderChildren();
     return this;

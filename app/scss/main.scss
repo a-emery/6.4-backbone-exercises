@@ -76,3 +76,41 @@ body {
   width: 40%;
   float: right;
 }
+
+.d-create-url {
+  width: 30%;
+  float: left;
+  height: 400px;
+  background: $light-gray;
+}
+
+.d-create-input {
+  display: block;
+  margin: 7px;
+  padding: 5px;
+}
+
+.d-url-list-container {
+  float: left;
+  width: 30%;
+  min-height: 300px;
+  margin: 0 10px;
+  background: $light-gray;
+}
+
+.bookmark-title-list {
+  list-style: none;
+}
+
+.bookmark-title-list a {
+  color: green;
+  text-decoration: none;
+}
+
+.d-tag-list-container {
+  float: right;
+  width: 30%;
+  min-height: 300px;
+  margin: 0 10px;
+  background: $light-gray;
+}
