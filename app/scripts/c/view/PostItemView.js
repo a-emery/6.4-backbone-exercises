@@ -8,10 +8,19 @@ export default Backbone.View.extend({
     'click [data-behavior=show-post]': 'showPost',
   },
 
-  template: JST['c/blogListItem'],
+  template: JST['c/blogListItemHeader'],
+
+  showTemplate: JST['c/blogListItem'],
 
   showPost: function(){
-    $('.current-post').html(this.render().el);
+    $('.current-post').html(this.rerender().el);
+  },
+
+  rerender: function(){
+    this.$el.html(this.showTemplate({
+      model: this.model.toJSON()
+      }));
+    return this;
   },
 
   render: function(){

@@ -231,9 +231,14 @@ require.register('c/view/PostItemView', function (exports, require, module) {
         tagName: 'li',
         className: 'blog-list-item',
         events: { 'click [data-behavior=show-post]': 'showPost' },
-        template: JST['c/blogListItem'],
+        template: JST['c/blogListItemHeader'],
+        showTemplate: JST['c/blogListItem'],
         showPost: function showPost() {
-            $('.current-post').html(this.render().el);
+            $('.current-post').html(this.rerender().el);
+        },
+        rerender: function rerender() {
+            this.$el.html(this.showTemplate({ model: this.model.toJSON() }));
+            return this;
         },
         render: function render() {
             this.$el.html(this.template({ model: this.model.toJSON() }));
