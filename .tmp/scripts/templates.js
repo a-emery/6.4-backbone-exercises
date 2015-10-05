@@ -48,8 +48,20 @@ this["JST"]["c/blogListItemHeader"] = Handlebars.template({"compiler":[6,">= 2.0
 this["JST"]["c/c-index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<div class=\"c-blog-posts\">\n<h1>Page C</h1>\n<div id=\"c-blog-posts-list\"></div>\n</div>\n\n<div class=\"current-post\">\n  \n</div>\n";
 },"useData":true});
+this["JST"]["e/blogPostListItem"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, alias1=this.lambda, alias2=this.escapeExpression;
+
+  return "<div class=\"blogListItemHeader\">\n  <h1 class=\"e-blog-title\">"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.title : stack1), depth0))
+    + "</h1>\n  <button class='delete' data-behavior=deletePost>Delete Post</button>\n</div>\n<p>"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.post : stack1), depth0))
+    + "</p>\n";
+},"useData":true});
+this["JST"]["e/createPost"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<input placeholder=\"Blog Title\" type=\"text\" name=\"title\" value=\"\" class=\"blogTitle\">\n<textarea placeholder=\"Blog Body\" type=\"text\" name=\"post\" value=\"\" class=\"postTextArea\"></textarea>\n<input type=\"submit\" class=\"blogSubmit\">\n";
+},"useData":true});
 this["JST"]["e/e-index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<h1>Page E</h1>\n";
+    return "<div class=\"header\"><h1>Aaron's Blog Stuff</h1></div>\n<div class=\"sidebar\">\n<div class=\"createPost\">\n</div>\n</div>\n\n<div class=\"blogPosts\"></div>\n";
 },"useData":true});
 this["JST"]["g-original-c/blogListItem"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;

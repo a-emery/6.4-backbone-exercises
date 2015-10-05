@@ -7,8 +7,6 @@ $(document).ready(function(){
   var posts = new PostsCollection();
   posts.fetch();
 
-  console.log(posts);
-
   var postsListView = new PostsListView({collection: posts});
   $('#c-blog-posts-list').append(postsListView.render().el);
 

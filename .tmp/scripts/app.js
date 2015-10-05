@@ -51,7 +51,6 @@ require.register('c/c-main', function (exports, require, module) {
         $('#container').append(JST['c/c-index']());
         var posts = new _cModelsPostsCollection2['default']();
         posts.fetch();
-        console.log(posts);
         var postsListView = new _cViewPostsList2['default']({ collection: posts });
         $('#c-blog-posts-list').append(postsListView.render().el);
     });
@@ -81,9 +80,24 @@ require.register('d/d-main', function (exports, require, module) {
 });
 require.register('e/e-main', function (exports, require, module) {
     'use strict';
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _eViewCreatePost = require('e/view/createPost');
+    var _eViewCreatePost2 = _interopRequireDefault(_eViewCreatePost);
+    var _eModelsPostCollection = require('e/models/PostCollection');
+    var _eModelsPostCollection2 = _interopRequireDefault(_eModelsPostCollection);
+    var _eViewBlogPostList = require('e/view/BlogPostList');
+    var _eViewBlogPostList2 = _interopRequireDefault(_eViewBlogPostList);
     $(document).ready(function () {
         // prepend the contents of `app/templates/application.hbs` into `body`
         $('#container').append(JST['e/e-index']());
+        var postsCollection = new _eModelsPostCollection2['default']();
+        postsCollection.fetch();
+        var createPostView = new _eViewCreatePost2['default']({ collection: postsCollection });
+        $('.createPost').append(createPostView.render().el);
+        var blogListView = new _eViewBlogPostList2['default']({ collection: postsCollection });
+        $('.blogPosts').append(blogListView.render().el);
     });
 });
 require.register('g-original-c/c-main', function (exports, require, module) {
@@ -385,6 +399,105 @@ require.register('d/view/BookmarkTitleListItem', function (exports, require, mod
         tagName: 'li',
         render: function render() {
             this.$el.html(this.template({ model: this.model.toJSON() }));
+            return this;
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('e/models/Post', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports['default'] = Backbone.Model.extend({
+        'default': {
+            title: '[no title]',
+            body: '[no body]'
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('e/models/PostCollection', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _eModelsPost = require('e/models/Post');
+    var _eModelsPost2 = _interopRequireDefault(_eModelsPost);
+    exports['default'] = Backbone.Collection.extend({
+        model: _eModelsPost2['default'],
+        url: 'http://tiny-lasagna-server.herokuapp.com/collections/aaronsbookmarks'
+    });
+    module.exports = exports['default'];
+});
+require.register('e/view/BlogPostList', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _eViewBlogPostListItem = require('e/view/BlogPostListItem');
+    var _eViewBlogPostListItem2 = _interopRequireDefault(_eViewBlogPostListItem);
+    exports['default'] = Backbone.View.extend({
+        tagName: 'ul',
+        className: '',
+        initialize: function initialize() {
+            this.listenTo(this.collection, 'add remove', this.render);
+        },
+        render: function render() {
+            this.renderChildren();
+            return this;
+        },
+        renderChildren: function renderChildren() {
+            var self = this;
+            this.$el.html('');
+            this.collection.each(function (post) {
+                var blogPostListItem = new _eViewBlogPostListItem2['default']({ model: post });
+                self.$el.append(blogPostListItem.render().el);
+            });
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('e/view/BlogPostListItem', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports['default'] = Backbone.View.extend({
+        tagName: 'li',
+        template: JST['e/blogPostListItem'],
+        events: { 'click [data-behavior=deletePost]': 'delete' },
+        'delete': function _delete() {
+            this.model.destroy({ success: console.log('success') });
+        },
+        render: function render() {
+            this.$el.html(this.template({ model: this.model.toJSON() }));
+            return this;
+        }
+    });
+    module.exports = exports['default'];
+});
+require.register('e/view/createPost', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports['default'] = Backbone.View.extend({
+        tagName: 'form',
+        template: JST['e/createPost'],
+        events: { 'submit': 'createBlogPost' },
+        createBlogPost: function createBlogPost(e) {
+            e.preventDefault();
+            this.collection.create(this.serializeForm());
+            this.$('input[type=text]').val('');
+            this.$('textarea').val('');
+        },
+        serializeForm: function serializeForm() {
+            var result = {};
+            var inputs = this.$el.serializeArray();
+            inputs.forEach(function (input) {
+                result[input.name] = input.value;
+            });
+            return result;
+        },
+        render: function render() {
+            this.$el.html(this.template());
             return this;
         }
     });
