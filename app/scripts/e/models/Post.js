@@ -1,8 +1,13 @@
 export default Backbone.Model.extend({
+  idAttribute: "_id",
+  defaults: function(){
+    return {
+      title: "[no title]",
+      body: "[no body]",
+      createdAt: Date.now()
+    };
+  },
 
-  default: {
-    title: "[no title]",
-    body: "[no body]"
-  }
+  // comparator: 'created_at'
 
 });

@@ -94,6 +94,8 @@ require.register('e/e-main', function (exports, require, module) {
         $('#container').append(JST['e/e-index']());
         var postsCollection = new _eModelsPostCollection2['default']();
         postsCollection.fetch();
+        console.log(postsCollection);
+        postsCollection.comparator = 'createdAt';
         var createPostView = new _eViewCreatePost2['default']({ collection: postsCollection });
         $('.createPost').append(createPostView.render().el);
         var blogListView = new _eViewBlogPostList2['default']({ collection: postsCollection });
@@ -157,6 +159,7 @@ require.register('a/view/CreatePostFormView', function (exports, require, module
             return this;
         },
         createBlogPost: function createBlogPost(e) {
+            console.log('this');
             e.preventDefault();
             this.collection.create(this.serializeForm());
             this.$('input[type=text]').val('');
@@ -264,7 +267,7 @@ require.register('c/view/PostItemView', function (exports, require, module) {
         template: JST['c/blogListItemHeader'],
         showTemplate: JST['c/blogListItem'],
         showPost: function showPost() {
-            $('.current-post').html(this.rerender().el);
+            $('.current-post').html(this.rerender().el);    // console.log(this.model.get('title'));
         },
         rerender: function rerender() {
             this.$el.html(this.showTemplate({ model: this.model.toJSON() }));
@@ -408,12 +411,16 @@ require.register('e/models/Post', function (exports, require, module) {
     'use strict';
     Object.defineProperty(exports, '__esModule', { value: true });
     exports['default'] = Backbone.Model.extend({
-        'default': {
-            title: '[no title]',
-            body: '[no body]'
+        idAttribute: '_id',
+        defaults: function defaults() {
+            return {
+                title: '[no title]',
+                body: '[no body]',
+                createdAt: Date.now()
+            };
         }
     });
-    module.exports = exports['default'];
+    module.exports = exports['default'];    // comparator: 'created_at'
 });
 require.register('e/models/PostCollection', function (exports, require, module) {
     'use strict';
@@ -466,7 +473,12 @@ require.register('e/view/BlogPostListItem', function (exports, require, module) 
         template: JST['e/blogPostListItem'],
         events: { 'click [data-behavior=deletePost]': 'delete' },
         'delete': function _delete() {
-            this.model.destroy({ success: console.log('success') });
+            var result = this.model.destroy({
+                success: function success() {
+                    console.log('destroy');
+                }
+            });
+            console.log(result);
         },
         render: function render() {
             this.$el.html(this.template({ model: this.model.toJSON() }));

@@ -14,21 +14,6 @@ this["JST"]["b/b-index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"]
 this["JST"]["b/form"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<input type=\"text\" name=\"firstName\" value=\"\" placeholder=\"First Name\" class=\"personFormInput\">\n<input type=\"text\" name=\"lastName\" value=\"\" placeholder=\"Last Name\" class=\"personFormInput\">\n<input type=\"text\" name=\"address\" value=\"\" placeholder=\"Address\" class=\"personFormInput\">\n<input type=\"text\" name=\"phoneNumber\" value=\"\" placeholder=\"Phone Number\" class=\"personFormInput\">\n<input type=\"submit\">\n";
 },"useData":true});
-this["JST"]["d/URLListItem"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, alias1=this.lambda, alias2=this.escapeExpression;
-
-  return "<a href=\""
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.url : stack1), depth0))
-    + "\"><h1>Title: "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.title : stack1), depth0))
-    + "</h1></a>\n";
-},"useData":true});
-this["JST"]["d/createURL"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<input type=\"text\" name=\"url\" placeholder=\"Bookmark URL\" value=\"\" class=\"d-create-input\">\n<input type=\"text\" name=\"title\" placeholder=\"Bookmark Name\" value=\"\" class=\"d-create-input\">\n<input type=\"text\" name=\"tag\" placeholder=\"Tag Name\" value=\"\" class=\"d-create-input\">\n<input type=\"submit\" name=\"submit\" value=\"submit\" class=\"d-create-input\">\n";
-},"useData":true});
-this["JST"]["d/d-index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<h1>Page D</h1>\n<div class=\"d-create-url\"></div>\n<div class=\"d-url-list-container\"></div>\n<div class=\"d-tag-list-container\"></div>\n";
-},"useData":true});
 this["JST"]["c/blogListItem"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, alias1=this.lambda, alias2=this.escapeExpression;
 
@@ -47,6 +32,21 @@ this["JST"]["c/blogListItemHeader"] = Handlebars.template({"compiler":[6,">= 2.0
 },"useData":true});
 this["JST"]["c/c-index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<div class=\"c-blog-posts\">\n<h1>Page C</h1>\n<div id=\"c-blog-posts-list\"></div>\n</div>\n\n<div class=\"current-post\">\n  \n</div>\n";
+},"useData":true});
+this["JST"]["d/URLListItem"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, alias1=this.lambda, alias2=this.escapeExpression;
+
+  return "<a href=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.url : stack1), depth0))
+    + "\"><h1>Title: "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.title : stack1), depth0))
+    + "</h1></a>\n";
+},"useData":true});
+this["JST"]["d/createURL"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<input type=\"text\" name=\"url\" placeholder=\"Bookmark URL\" value=\"\" class=\"d-create-input\">\n<input type=\"text\" name=\"title\" placeholder=\"Bookmark Name\" value=\"\" class=\"d-create-input\">\n<input type=\"text\" name=\"tag\" placeholder=\"Tag Name\" value=\"\" class=\"d-create-input\">\n<input type=\"submit\" name=\"submit\" value=\"submit\" class=\"d-create-input\">\n";
+},"useData":true});
+this["JST"]["d/d-index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<h1>Page D</h1>\n<div class=\"d-create-url\"></div>\n<div class=\"d-url-list-container\"></div>\n<div class=\"d-tag-list-container\"></div>\n";
 },"useData":true});
 this["JST"]["e/blogPostListItem"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, alias1=this.lambda, alias2=this.escapeExpression;

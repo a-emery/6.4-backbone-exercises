@@ -8,6 +8,8 @@ $(document).ready(function(){
 
   var postsCollection = new PostsCollection();
   postsCollection.fetch();
+  console.log(postsCollection);
+  postsCollection.comparator = 'createdAt';
 
   var createPostView = new CreatePostView({collection: postsCollection});
   $('.createPost').append(createPostView.render().el);

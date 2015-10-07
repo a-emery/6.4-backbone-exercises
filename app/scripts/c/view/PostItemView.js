@@ -14,6 +14,7 @@ export default Backbone.View.extend({
 
   showPost: function(){
     $('.current-post').html(this.rerender().el);
+    // console.log(this.model.get('title'));
   },
 
   rerender: function(){

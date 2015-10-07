@@ -9,7 +9,8 @@ export default Backbone.View.extend({
   },
 
   delete: function(){
-    this.model.destroy({success: console.log('success')});
+    var result = this.model.destroy({success: function(){console.log('destroy')}});
+    console.log(result);
   },
 
   render: function(){

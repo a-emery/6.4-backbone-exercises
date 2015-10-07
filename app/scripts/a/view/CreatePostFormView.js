@@ -14,6 +14,7 @@ var CreatePostForm = Backbone.View.extend({
   },
 
   createBlogPost: function(e){
+    console.log('this');
     e.preventDefault();
     this.collection.create(this.serializeForm());
     this.$('input[type=text]').val('');
