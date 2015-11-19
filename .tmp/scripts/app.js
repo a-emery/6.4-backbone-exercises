@@ -120,33 +120,6 @@ require.register('g-original-c/c-main', function (exports, require, module) {
         $('#container').append(blogList.render().el);
     });
 });
-require.register('a/models/Post', function (exports, require, module) {
-    'use strict';
-    Object.defineProperty(exports, '__esModule', { value: true });
-    var Post = Backbone.Model.extend({
-        'default': {
-            title: '',
-            body: ''
-        }
-    });
-    exports['default'] = Post;
-    module.exports = exports['default'];
-});
-require.register('a/models/PostsCollection', function (exports, require, module) {
-    'use strict';
-    Object.defineProperty(exports, '__esModule', { value: true });
-    function _interopRequireDefault(obj) {
-        return obj && obj.__esModule ? obj : { 'default': obj };
-    }
-    var _aModelsPost = require('a/models/Post');
-    var _aModelsPost2 = _interopRequireDefault(_aModelsPost);
-    var PostsCollection = Backbone.Collection.extend({
-        model: _aModelsPost2['default'],
-        url: 'http://tiny-lasagna-server.herokuapp.com/collections/aaronblogposts'
-    });
-    exports['default'] = PostsCollection;
-    module.exports = exports['default'];
-});
 require.register('a/view/CreatePostFormView', function (exports, require, module) {
     'use strict';
     Object.defineProperty(exports, '__esModule', { value: true });
@@ -175,6 +148,33 @@ require.register('a/view/CreatePostFormView', function (exports, require, module
         }
     });
     exports['default'] = CreatePostForm;
+    module.exports = exports['default'];
+});
+require.register('a/models/Post', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    var Post = Backbone.Model.extend({
+        'default': {
+            title: '',
+            body: ''
+        }
+    });
+    exports['default'] = Post;
+    module.exports = exports['default'];
+});
+require.register('a/models/PostsCollection', function (exports, require, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _aModelsPost = require('a/models/Post');
+    var _aModelsPost2 = _interopRequireDefault(_aModelsPost);
+    var PostsCollection = Backbone.Collection.extend({
+        model: _aModelsPost2['default'],
+        url: 'http://tiny-lasagna-server.herokuapp.com/collections/aaronblogposts'
+    });
+    exports['default'] = PostsCollection;
     module.exports = exports['default'];
 });
 require.register('b/models/PeopleCollection', function (exports, require, module) {
