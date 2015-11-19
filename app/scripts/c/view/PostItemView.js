@@ -13,8 +13,10 @@ export default Backbone.View.extend({
   showTemplate: JST['c/blogListItem'],
 
   showPost: function(){
-    $('.current-post').html(this.rerender().el);
-    // console.log(this.model.get('title'));
+    var newPost = this.model.clone();
+    $('.current-post').html(this.showTemplate({
+      model: newPost.toJSON()
+      }));
   },
 
   rerender: function(){

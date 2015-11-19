@@ -159,10 +159,10 @@ require.register('a/view/CreatePostFormView', function (exports, require, module
             return this;
         },
         createBlogPost: function createBlogPost(e) {
-            console.log('this');
             e.preventDefault();
             this.collection.create(this.serializeForm());
             this.$('input[type=text]').val('');
+            this.$('textarea').val('');
         },
         serializeForm: function serializeForm() {
             var result = {};
@@ -170,6 +170,7 @@ require.register('a/view/CreatePostFormView', function (exports, require, module
             inputs.forEach(function (input) {
                 result[input.name] = input.value;
             });
+            console.log('Blog Title: ' + result.title + '\n' + 'Blog Post: ' + result.post);
             return result;
         }
     });
@@ -209,6 +210,7 @@ require.register('b/view/PersonForm', function (exports, require, module) {
     Object.defineProperty(exports, '__esModule', { value: true });
     exports['default'] = Backbone.View.extend({
         tagName: 'form',
+        className: 'bForm',
         template: JST['b/form'],
         render: function render() {
             this.$el.html(this.template());
@@ -221,12 +223,12 @@ require.register('b/view/PersonForm', function (exports, require, module) {
             this.$('input[type=text]').val('');
         },
         serializeForm: function serializeForm() {
-            console.log('something');
             var result = {};
             var inputs = this.$el.serializeArray();
             inputs.forEach(function (input) {
                 result[input.name] = input.value;
             });
+            console.log('First Name: ' + result.firstName + '\n' + 'Last Name: ' + result.lastName + '\n' + 'Address: ' + result.address + '\n' + 'Phone Number: ' + result.phoneNumber);
             return result;
         }
     });
@@ -267,7 +269,8 @@ require.register('c/view/PostItemView', function (exports, require, module) {
         template: JST['c/blogListItemHeader'],
         showTemplate: JST['c/blogListItem'],
         showPost: function showPost() {
-            $('.current-post').html(this.rerender().el);    // console.log(this.model.get('title'));
+            var newPost = this.model.clone();
+            $('.current-post').html(this.showTemplate({ model: newPost.toJSON() }));
         },
         rerender: function rerender() {
             this.$el.html(this.showTemplate({ model: this.model.toJSON() }));

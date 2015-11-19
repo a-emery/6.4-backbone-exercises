@@ -14,10 +14,10 @@ var CreatePostForm = Backbone.View.extend({
   },
 
   createBlogPost: function(e){
-    console.log('this');
     e.preventDefault();
     this.collection.create(this.serializeForm());
     this.$('input[type=text]').val('');
+    this.$('textarea').val('');
   },
 
   serializeForm: function() {
@@ -26,6 +26,10 @@ var CreatePostForm = Backbone.View.extend({
     inputs.forEach(function(input) {
       result[input.name] = input.value;
     });
+    console.log(
+      'Blog Title: ' + result.title + '\n' +
+      'Blog Post: ' + result.post
+    );
     return result;
   },
 

@@ -20,6 +20,16 @@ body {
   font-family: $base-font-family;
 }
 
+.index-link {
+  text-decoration: none;
+}
+
+.index-button {
+  display: block;
+  width: 200px;
+  margin: 10px;
+}
+
 .postTextArea {
   resize: none;
   display: block;
@@ -28,6 +38,10 @@ body {
   margin: 20px;
   height: 300px;
   padding: 7px;
+}
+
+.aBlogTitleTitle {
+  margin: 0;
 }
 
 .blogTitle {
@@ -47,9 +61,13 @@ body {
   margin: 20px;
 }
 
+.bForm {
+  margin: 20px;
+}
+
 .personFormInput {
   display: block;
-  margin: 20px;
+  margin: 20px 0;
   padding: 3px;
 }
 

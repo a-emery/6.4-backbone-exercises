@@ -1,15 +1,15 @@
 this["JST"] = this["JST"] || {};
 this["JST"]["application"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<h1>Objective Links</h1>\n\n<a href=\"a.html\"><button>Objective A</button></a>\n<a href=\"b.html\"><button>Objective B</button></a>\n<a href=\"c.html\"><button>Objective C</button></a>\n<a href=\"d.html\"><button>Objective D</button></a>\n<a href=\"e.html\"><button>Objective E</button></a>\n\n<a href=\"index.html\"><button>Index</button></a>\n";
+    return "<h1>Objective Links</h1>\n\n<a href=\"a.html\" class=\"index-link\"><button class=\"index-button\">Objective A <br> (Create a blog post)</button></a>\n<a href=\"b.html\" class=\"index-link\"><button class=\"index-button\">Objective B <br> (Create a contact)</button></a>\n<a href=\"c.html\" class=\"index-link\"><button class=\"index-button\">Objective C <br> (View a blog post)</button></a>\n<a href=\"d.html\" class=\"index-link\"><button class=\"index-button\">Objective D <br> (Create something)</button></a>\n<a href=\"e.html\" class=\"index-link\"><button class=\"index-button\">Objective E <br> (Create something)</button></a>\n";
 },"useData":true});
 this["JST"]["a/a-index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<h1 class=\"aBlogPost\">Create a Blog Post</h1>\n";
+    return "<h1 class=\"aBlogTitleTitle\">Create a Blog Post</h1>\n<h4><a href=\"/\">Home</a></h4>\n<h4>Results will be console logged and posted to http://tiny-lasagna-server.herokuapp.com/collections/aaronblogposts</h4>\n";
 },"useData":true});
 this["JST"]["a/form"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<input placeholder=\"Blog Title\" type=\"text\" name=\"title\" value=\"\" class=\"blogTitle\">\n<textarea placeholder=\"Blog Body\" type=\"text\" name=\"post\" value=\"\" class=\"postTextArea\"></textarea>\n<input type=\"submit\" class=\"blogSubmit\">\n";
 },"useData":true});
 this["JST"]["b/b-index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<h1>Page B</h1>\n";
+    return "<h1>Create A Contact</h1>\n<h4><a href=\"/\">Home</a></h4>\n<h4>Results will be console logged and posted to http://tiny-lasagna-server.herokuapp.com/collections/aaronblogposts</h4>\n";
 },"useData":true});
 this["JST"]["b/form"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<input type=\"text\" name=\"firstName\" value=\"\" placeholder=\"First Name\" class=\"personFormInput\">\n<input type=\"text\" name=\"lastName\" value=\"\" placeholder=\"Last Name\" class=\"personFormInput\">\n<input type=\"text\" name=\"address\" value=\"\" placeholder=\"Address\" class=\"personFormInput\">\n<input type=\"text\" name=\"phoneNumber\" value=\"\" placeholder=\"Phone Number\" class=\"personFormInput\">\n<input type=\"submit\">\n";
@@ -31,7 +31,7 @@ this["JST"]["c/blogListItemHeader"] = Handlebars.template({"compiler":[6,">= 2.0
     + "</h1>\n</div>\n";
 },"useData":true});
 this["JST"]["c/c-index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<div class=\"c-blog-posts\">\n<h1>Page C</h1>\n<div id=\"c-blog-posts-list\"></div>\n</div>\n\n<div class=\"current-post\">\n  \n</div>\n";
+    return "<div class=\"c-blog-posts\">\n<h1>Read a Blog</h1>\n<h4><a href=\"/\">Home</a></h4>\n<h4>Click on a blog title and the full blog will appear on the right. Blogs are a Backbone Collection created with Objective A</h4>\n<div id=\"c-blog-posts-list\"></div>\n</div>\n\n<div class=\"current-post\">\n\n</div>\n";
 },"useData":true});
 this["JST"]["d/URLListItem"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, alias1=this.lambda, alias2=this.escapeExpression;
